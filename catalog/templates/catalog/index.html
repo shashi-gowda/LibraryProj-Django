@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Document</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h1>HomePage</h1>
+        <p>Total Books: {{num_books}}</p>
+        <p>Num Available: {{num_instances_avail}}</p>
+        
+        {% comment %} we can access objects of django which is passed to templates {% endcomment %}
+        {% if user.is_authenticated %}
+            <p> You are logged in!</p>
+            <p> Welcome: {{user.get_username}}</p>
+            <a href="{% url 'logout' %}?next={{request.path}}">LOGOUT HERE</a>
+            {% comment %} ?next={{request.path}} takes u to home page and this is optional on ur choice {% endcomment %}
+        {% else %}
+            <p> You are not logged in!</p>
+            <a href="{% url 'login' %}?next={{request.path}}">LOGIN HERE</a> 
+        {% endif %}
+    </body>
+</html>
